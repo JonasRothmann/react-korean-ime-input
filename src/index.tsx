@@ -14,17 +14,17 @@ import {
 // @ts-ignore
 } from 'korean-ime-simple/common'
 
-const KoreanIMEInput: FC<InputHTMLAttributes<HTMLInputElement>> = ({ value, onChange, ...props }) => {
+const KoreanIMEInput: FC<InputHTMLAttributes<HTMLInputElement>> = ({ value, onChange, onKeyDown, ...props }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     e.target.value = handleKorean(e.target.value)
     onChange && onChange(e)
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): boolean => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): React.KeyboardEvent<HTMLInputElement> => {
     const target = e.target as EventTarget & HTMLInputElement
     if (e.code === 'Backspace') {
       const selection = (target.selectionStart || 0) - (target.selectionEnd || 0)
-      if (selection !== 0) return true
+      if (selection !== 0) return e
       const { pos } = position(target)
 
       const newValue = String(value)
@@ -44,12 +44,12 @@ const KoreanIMEInput: FC<InputHTMLAttributes<HTMLInputElement>> = ({ value, onCh
       }
 
       e.preventDefault()
-      return false
+      return e
     }
-    return true
+    return e
   }
 
-  return <input onKeyDown={handleKeyDown} value={value} onChange={e => handleChange(e)} {...props} />
+  return <input onKeyDown={e => onKeyDown ? onKeyDown(handleKeyDown(e)) : handleKeyDown(e)} value={value} onChange={e => handleChange(e)} {...props} />
 }
 export default KoreanIMEInput
 
