@@ -6,7 +6,8 @@
     "react",
     "korean",
     "IME",
-    "input"
+    "input",
+    "hangeul"
   ],
   "files": [
     "/lib",
