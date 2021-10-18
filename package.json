@@ -1,0 +1,40 @@
+{
+  "name": "react-korean-ime-input",
+  "author": "Jonas Rothmann <jonasrothmannhjalager@gmail.com> (https://jonasrothmann.com)",
+  "version": "1.0.2",
+  "keywords": [
+    "react",
+    "korean",
+    "IME",
+    "input"
+  ],
+  "files": [
+    "/lib",
+    "README.md"
+  ],
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
+  "dependencies": {
+    "caret-pos": "^2.0.0",
+    "gksdud": "^2.0.0",
+    "korean-ime-simple": "^1.1.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.30",
+    "@types/react-dom": "^17.0.9",
+    "cross-env": "^7.0.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "typescript": "^4.4.4"
+  },
+  "scripts": {
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs"
+  }
+}
